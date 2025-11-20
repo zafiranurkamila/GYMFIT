@@ -1,34 +1,37 @@
-🌟 GYMFIT — Frontend
+# 🌟 GYMFIT — Frontend
 
-A simple, clean, and responsive fitness web interface built using pure HTML, CSS, and JavaScript.
-Proyek ini bertujuan membantu pengguna mengakses informasi latihan, mengelola workout, dan melihat progress secara mudah melalui tampilan web yang intuitif.
+GYMFIT adalah aplikasi web sederhana berbasis **HTML, CSS, dan JavaScript murni** (tanpa framework). Proyek ini menyediakan tampilan antarmuka untuk membantu pengguna mengakses latihan, mengatur workout, dan memantau progress.
 
-📌 Deskripsi Proyek
+---
 
-GYMFIT adalah aplikasi web statis (tanpa framework) yang menyediakan tampilan antarmuka untuk:
+## 📌 Deskripsi Proyek
 
-Dashboard latihan
+GYMFIT Frontend dibuat untuk memberikan pengalaman latihan yang modern dan mudah digunakan. Aplikasi ini mencakup:
 
-Menu workout
+* Dashboard latihan
+* Menu daftar workout
+* Halaman progress
+* Navigasi yang responsif
+* UI simpel dan bersih
 
-Progress dan tracking
+Semua halaman dibangun tanpa library atau framework — hanya HTML, CSS, dan JavaScript.
 
-Navigasi yang responsif
+---
 
-Tampilan modern dan mudah digunakan
+## 🚀 Teknologi yang Digunakan
 
-Semua halaman ditulis dengan HTML, CSS, dan JavaScript murni, tanpa library atau framework tambahan.
+| Teknologi                | Fungsi                   |
+| ------------------------ | ------------------------ |
+| **HTML5**                | Struktur UI              |
+| **CSS3**                 | Layout & styling         |
+| **JavaScript (Vanilla)** | Interaksi & logika dasar |
+| **Git & GitHub**         | Version control          |
 
-🚀 Teknologi yang Digunakan
-Teknologi	Fungsi
-HTML5	Struktur halaman
-CSS3	Styling & layout
-JavaScript (Vanilla JS)	Interaksi dan logika dasar
-Git & GitHub	Version control dan penyimpanan repository
-📂 Struktur Folder
+---
 
-Contoh struktur proyek (sesuaikan jika berbeda):
+## 📂 Struktur Folder
 
+```
 frontend/
 │── index.html
 │── style.css
@@ -40,43 +43,60 @@ frontend/
       ├── dashboard.html
       ├── workout.html
       ├── progress.html
+```
 
-🔧 Cara Menjalankan Proyek
+*(Sesuaikan jika struktur berbeda)*
 
-Karena tidak memakai framework, cara menjalankannya sangat mudah:
+---
 
-Clone repository
+## 🔧 Cara Menjalankan Proyek
 
+Karena tidak menggunakan framework atau build tools, cara menjalankannya sangat mudah:
+
+1. Clone repository:
+
+```bash
 git clone https://github.com/zafiranurkamila/GYMFIT.git
+```
 
+2. Masuk ke folder:
 
-Masuk ke folder frontend
-
+```bash
 cd GYMFIT/frontend
+```
 
+3. Buka file:
 
-Buka file index.html di browser
-Cukup double-click:
-
+```
 index.html
+```
 
+Cukup buka di browser → tidak perlu `npm install` atau server tambahan.
 
-Tidak diperlukan perintah npm, server, atau install dependency.
+---
 
-🐧 Git Commands yang Digunakan
+## 🐧 Git Commands untuk Upload
 
-Proyek ini berhasil dipush ke GitHub dengan perintah:
+Proyek ini diupload menggunakan perintah:
 
+```bash
 git remote add origin https://github.com/zafiranurkamila/GYMFIT.git
 git push -u origin main
+```
 
+Branch main kini sudah tersambung ke GitHub.
 
-Branch main sekarang sudah tersambung ke remote GitHub.
+---
 
-🤝 Kontribusi
+## 🤝 Kontribusi
 
-Pull Request dan masukan sangat diterima apabila ingin mengembangkan tampilan atau menambah fitur.
+Kontribusi sangat diterima. Silakan pull request atau buat issue jika ingin menambah fitur atau memperbaiki tampilan.
 
-📜 Lisensi
+---
 
-Proyek ini menggunakan MIT License, bebas digunakan dan dimodifikasi dengan menyertakan credit.
+## 📜 Lisensi
+
+Proyek ini menggunakan **MIT License**. Bebas digunakan dan dikembangkan dengan mencantumkan kredit.
+
+---
+
