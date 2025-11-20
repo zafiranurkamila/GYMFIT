@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language</title>
+    <link rel="stylesheet" href="../Style/setting.css">
+</head>
+
+<body>
+
+<!-- 🔥 PHONE FRAME WRAPPER -->
+<div class="phone-frame">
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="page-header">
+            <img onclick="history.back()" src="../images/back.png" class="back-btn">
+            <h3>Language</h3>
+        </div>
+
+        <div class="lang-section">
+
+            <!-- BOX UTAMA -->
+            <div class="lang-item primary-lang" onclick="toggleDropdown()">
+                <div class="lang-left">
+                    <img id="selectedFlag" src="../images/us.png">
+                    <span id="selectedCountry">United States</span>
+                </div>
+                <p class="arrow">></p>
+            </div>
+
+            <!-- DROPDOWN LIST -->
+            <div id="dropdownLang" class="dropdown hidden">
+
+                <div class="lang-item" onclick="setLanguage('../images/us.png','United States','+1')">
+                    <div class="lang-left">
+                        <img src="../images/us.png">
+                        <span>United States</span>
+                    </div>
+                </div>
+
+                <div class="lang-item" onclick="setLanguage('../images/indonesia.png','Indonesia','+62')">
+                    <div class="lang-left">
+                        <img src="../images/indonesia.png">
+                        <span>Indonesia</span>
+                    </div>
+                </div>
+
+                <div class="lang-item" onclick="setLanguage('../images/uk.png','United Kingdom','+44')">
+                    <div class="lang-left">
+                        <img src="../images/uk.png">
+                        <span>United Kingdom</span>
+                    </div>
+                </div>
+
+                <div class="lang-item" onclick="setLanguage('../images/malaysia.png','Malaysia','+60')">
+                    <div class="lang-left">
+                        <img src="../images/malaysia.png">
+                        <span>Malaysia</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- BOTTOM NAV -->
+        <div class="bottom-nav">
+            <img src="../images/grid.png" class="nav-icon" onclick="location.href='beranda.html'">
+            <img src="../images/bell.png" class="nav-icon">
+            <div class="home-btn"><img src="../images/home.png"></div>
+            <img src="../images/chat.png" class="nav-icon" onclick="location.href='komunitas.html'">
+            <img src="../images/user.png" class="nav-icon active">
+        </div>
+
+    </div>
+
+</div> <!-- END PHONE FRAME -->
+
+
+<script>
+    function toggleDropdown() {
+        document.getElementById("dropdownLang").classList.toggle("hidden");
+    }
+
+    function setLanguage(flag, country, code) {
+        // update UI
+        document.getElementById("selectedFlag").src = flag;
+        document.getElementById("selectedCountry").innerText = country;
+
+        // simpan ke localStorage
+        localStorage.setItem("selectedFlag", flag);
+        localStorage.setItem("selectedCountry", country);
+        localStorage.setItem("selectedCode", code);
+
+        // tutup dropdown
+        document.getElementById("dropdownLang").classList.add("hidden");
+    }
+</script>
+
+</body>
+</html>

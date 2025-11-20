@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="../Style/setting.css">
+</head>
+
+<body>
+
+    <!-- 🔥 PHONE FRAME WRAPPER -->
+    <div class="phone-frame">
+
+        <div class="container">
+
+            <!-- HEADER -->
+            <div class="header-top">
+                <img onclick="history.back()" src="../images/back.png" class="back-btn">
+                <h3>PENGATURAN</h3>
+            </div>
+
+            <input type="text" placeholder="Search" class="setting-search">
+
+            <!-- MENU -->
+            <div class="setting-list">
+
+                <div class="setting-item" onclick="location.href='editprofile.html'">
+                    <div class="icon-box">
+                        <img src="../images/editprofile.png">
+                    </div>
+                    <span>Edit Profile</span>
+                    <p>></p>
+                </div>
+
+                <div class="setting-item" onclick="location.href='notifikasiset.html'">
+                    <div class="icon-box">
+                        <img src="../images/notifikasiset.png">
+                    </div>
+                    <span>Notification</span>
+                    <p>></p>
+                </div>
+
+                <div class="setting-item" onclick="location.href='language.html'">
+                    <div class="icon-box">
+                        <img src="../images/language.png">
+                    </div>
+                    <span>Language</span>
+                    <p>></p>
+                </div>
+
+                <div class="setting-item logout">
+                    <div class="icon-box">
+                        <img src="../images/out.png">
+                    </div>
+                    <span>Out</span>
+                    <p>></p>
+                </div>
+
+            </div>
+
+            <!-- BOTTOM NAV -->
+            <div class="bottom-nav">
+                <img src="../images/grid.png" class="nav-icon" onclick="location.href='beranda.html'">
+                <img src="../images/bell.png" class="nav-icon">
+                <div class="home-btn"><img src="../images/home.png"></div>
+                <img src="../images/chat.png" class="nav-icon" onclick="location.href='komunitas.html'">
+                <img src="../images/user.png" class="nav-icon active">
+            </div>
+
+        </div> <!-- END CONTAINER -->
+
+    </div> <!-- END PHONE FRAME -->
+
+</body>
+
+</html>

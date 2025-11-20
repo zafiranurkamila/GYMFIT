@@ -1,0 +1,128 @@
+/* IMPORT SEMUA STYLE BERANDA */
+@import url('beranda.css');
+
+/* ————————————————————
+   KHUSUS PAGE KOMUNITAS
+———————————————————— */
+
+/* Header dummy untuk ikon barbel */
+.komunitas-header {
+    width: 100%;
+    padding: 40px 0 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.komunitas-header img {
+    width: 150px;
+}
+
+/* AREA POST */
+.post-list {
+    padding: 0 25px 120px;
+}
+
+.post {
+    background: #252525;
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+}
+
+/* Header posting */
+.post-header {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.avatar {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.post-header h3 {
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.post-text {
+    color: #ddd;
+    font-size: 15px;
+}
+
+/* Post images row (multi foto) */
+.post-img-row {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.post-img-row img {
+    width: 180px;
+    height: 180px;
+    border-radius: 18px;
+    object-fit: cover;
+}
+
+/* Single big image */
+.post-main-img {
+    width: 100%;
+    border-radius: 20px;
+    margin-top: 10px;
+}
+
+/* Nav active */
+.nav-icon.active {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.avatar-wrapper {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+}
+
+.avatar {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.add-btn {
+    position: absolute;
+    bottom: -3px;      /* geser dikit ke bawah */
+    right: -3px;       /* geser dikit ke kanan */
+    width: 24px;
+    height: 24px;
+    background: #c3ff0a; /* warna hijau neon */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(164, 208, 7, 0.4);
+}
+
+.add-btn span {
+    color: black;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: -1px;
+}
+
+.phone-frame {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    background: #000;
+    min-height: 100vh;
+    position: relative;
+}
+

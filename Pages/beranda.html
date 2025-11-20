@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GYM FIT</title>
+    <link rel="stylesheet" href="../Style/beranda.css">
+</head>
+
+<body>
+
+    <!-- WRAPPER HP -->
+    <div class="phone-frame">
+
+        <div class="container">
+            <!-- SIDEBAR MENU -->
+            <div class="sidebar" id="sidebar">
+                <div class="sidebar-content">
+                    <div class="sidebar-menu-close" id="menuClose">
+                        <img src="../images/menu.png" alt="Close Menu">
+                    </div>
+                </div>
+                <div class="sidebar-bottom">
+                    <div class="sidebar-item" onclick="window.location.href='setting.html'">
+                        <img src="../images/setting.png" alt="Settings">
+                        <span>SETTING</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OVERLAY -->
+            <div class="overlay" id="overlay"></div>
+
+            <!-- HEADER AREA -->
+            <div class="header-area">
+
+                <!-- NAVBAR -->
+                <div class="navbar">
+                    <img src="../images/menu.png" class="menu-icon" id="menuBtn">
+                    <img src="../images/logo.png" class="logo-icon">
+                    <img src="../images/profile.png" class="profile-icon">
+                </div>
+
+                <!-- BLACK BLUR -->
+                <div class="nav-blur"></div>
+
+                <!-- HEADER IMAGE -->
+                <div class="header-img">
+                    <img src="../images/header.jpg" alt="">
+                </div>
+            </div>
+
+            <!-- SEARCH -->
+            <div class="search-box">
+                <input type="text" placeholder="Search">
+            </div>
+
+            <!-- TABS -->
+            <div class="tabs">
+                <button id="btnBeginner" class="active">Beginner step</button>
+                <button id="btnPro" class="inactive">Pro Step</button>
+            </div>
+
+            <!-- BEGINNER SECTION -->
+            <div id="beginner-section">
+                <h3 class="title">Beginner Steps</h3>
+
+                <div class="step-row">
+                    <img src="../images/img1.png">
+                    <img src="../images/img2.png">
+                    <img src="../images/img3.png">
+                </div>
+            </div>
+
+            <!-- PRO SECTION -->
+            <div id="pro-section" style="display: none;">
+                <h3 class="title">Pro Steps</h3>
+
+                <div class="empty-pro">
+                    <p>Belum ada Pro Step untuk saat ini.</p>
+                    <span>Stay tuned untuk update berikutnya 💪</span>
+                </div>
+            </div>
+
+
+            <!-- BOTTOM NAV -->
+            <div class="bottom-nav">
+                <img src="../images/grid.png" class="nav-icon">
+                <img src="../images/bell.png" class="nav-icon">
+
+                <div class="home-btn">
+                    <img src="../images/home.png">
+                </div>
+
+                <img src="../images/chat.png" class="nav-icon" onclick="window.location.href='komunitas.html'">
+                <img src="../images/user.png" class="nav-icon">
+            </div>
+
+        </div> <!-- END PHONE FRAME -->
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+
+                /* ========== SIDEBAR SCRIPT MU (JANGAN DIHAPUS) ========== */
+                const menuBtn = document.getElementById('menuBtn');
+                const menuClose = document.getElementById('menuClose');
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('overlay');
+
+                if (menuBtn) {
+                    menuBtn.addEventListener('click', function () {
+                        sidebar.classList.toggle('active');
+                        overlay.classList.toggle('active');
+                    });
+                }
+
+                if (menuClose) {
+                    menuClose.addEventListener('click', function () {
+                        sidebar.classList.remove('active');
+                        overlay.classList.remove('active');
+                    });
+                }
+
+                if (overlay) {
+                    overlay.addEventListener('click', function () {
+                        sidebar.classList.remove('active');
+                        overlay.classList.remove('active');
+                    });
+                }
+
+                /* ========== TAB SWITCHER (INI BAGIAN PENTING) ========== */
+                const btnBeginner = document.getElementById('btnBeginner');
+                const btnPro = document.getElementById('btnPro');
+                const beginnerSection = document.getElementById('beginner-section');
+                const proSection = document.getElementById('pro-section');
+
+                btnBeginner.addEventListener('click', function () {
+                    btnBeginner.classList.add('active');
+                    btnBeginner.classList.remove('inactive');
+
+                    btnPro.classList.remove('active');
+                    btnPro.classList.add('inactive');
+
+                    beginnerSection.style.display = 'block';
+                    proSection.style.display = 'none';
+                });
+
+                btnPro.addEventListener('click', function () {
+                    btnPro.classList.add('active');
+                    btnPro.classList.remove('inactive');
+
+                    btnBeginner.classList.remove('active');
+                    btnBeginner.classList.add('inactive');
+
+                    beginnerSection.style.display = 'none';
+                    proSection.style.display = 'block';
+                });
+
+            });
+        </script>
+
+</body>
+
+</html>

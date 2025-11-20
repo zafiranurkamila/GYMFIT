@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="../Style/setting.css">
+</head>
+
+<body>
+
+    <div class="phone-frame"> <!-- WRAPPER HP -->
+
+        <div class="container">
+
+            <!-- HEADER -->
+            <div class="page-header">
+                <img onclick="history.back()" src="../images/back.png" class="back-btn">
+                <h3>Edit Profile</h3>
+            </div>
+
+            <!-- FORM -->
+            <div class="form-section">
+
+                <input type="text" class="input-field" placeholder="Full Name">
+                <input type="text" class="input-field" placeholder="Nickname">
+                <input type="email" class="input-field" placeholder="Email">
+
+                <!-- COUNTRY DROPDOWN -->
+                <div class="country-select" onclick="toggleCountryList()">
+                    <img src="../images/us.png" id="selected-flag">
+                    <span id="selected-country">United States</span>
+                    <p class="arrow">▼</p>
+                </div>
+
+                <ul class="country-list" id="countryList">
+                    <li onclick="selectCountry('../images/us.png', 'United States')">
+                        <img src="../images/us.png"> United States
+                    </li>
+                    <li onclick="selectCountry('../images/indonesia.png', 'Indonesia')">
+                        <img src="../images/indonesia.png"> Indonesia
+                    </li>
+                    <li onclick="selectCountry('../images/uk.png', 'United Kingdom')">
+                        <img src="../images/uk.png"> United Kingdom
+                    </li>
+                    <li onclick="selectCountry('../images/malaysia.png', 'Malaysia')">
+                        <img src="../images/malaysia.png"> Malaysia
+                    </li>
+                </ul>
+
+                <!-- PHONE FIELD -->
+                <div class="phone-wrapper">
+                    <img src="../images/us.png" id="phone-flag">
+                    <span id="phone-code">+1</span>
+                    <input type="text" placeholder="Phone Number" id="phone-input">
+                </div>
+
+            </div>
+
+            <!-- BOTTOM NAV -->
+            <div class="bottom-nav">
+                <img src="../images/grid.png" class="nav-icon" onclick="location.href='beranda.html'">
+                <img src="../images/bell.png" class="nav-icon">
+                <div class="home-btn"><img src="../images/home.png"></div>
+                <img src="../images/chat.png" class="nav-icon" onclick="location.href='komunitas.html'">
+                <img src="../images/user.png" class="nav-icon active">
+            </div>
+
+        </div> <!-- end container -->
+
+    </div> <!-- end phone-frame -->
+
+    <script>
+        // Load pilihan negara otomatis dari Language Page
+        window.addEventListener("DOMContentLoaded", function () {
+
+            const savedFlag = localStorage.getItem("selectedFlag");
+            const savedCountry = localStorage.getItem("selectedCountry");
+            const savedCode = localStorage.getItem("selectedCode");
+
+            if (savedFlag && savedCountry && savedCode) {
+                // Set dropdown country
+                document.getElementById("selected-flag").src = savedFlag;
+                document.getElementById("selected-country").innerText = savedCountry;
+
+                // Set phone section
+                document.getElementById("phone-flag").src = savedFlag;
+                document.getElementById("phone-code").innerText = savedCode;
+            }
+        });
+
+        function toggleCountryList() {
+            let list = document.getElementById("countryList");
+            list.style.display = list.style.display === "block" ? "none" : "block";
+        }
+
+        function selectCountry(flag, name) {
+            // Ubah dropdown
+            document.getElementById("selected-flag").src = flag;
+            document.getElementById("selected-country").innerText = name;
+
+            // Ubah phone
+            let code = "+1";
+            if (name === "Indonesia") code = "+62";
+            if (name === "United Kingdom") code = "+44";
+            if (name === "Malaysia") code = "+60";
+
+            document.getElementById("phone-flag").src = flag;
+            document.getElementById("phone-code").innerText = code;
+
+            // Simpan pilihan baru
+            localStorage.setItem("selectedFlag", flag);
+            localStorage.setItem("selectedCountry", name);
+            localStorage.setItem("selectedCode", code);
+
+            // Tutup dropdown
+            document.getElementById("countryList").style.display = "none";
+        }
+    </script>
+</body>
+
+</html>
