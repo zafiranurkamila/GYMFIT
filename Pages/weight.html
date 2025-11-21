@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is Your Weight?</title>
+    <link rel="stylesheet" href="../Style/weight.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>What is Your Weight?</h1>
+        <p class="subtitle">Weight in kg. Don't worry, you can always<br>change it later</p>
+
+        <div class="weight-picker-wrapper">
+            <div class="weight-picker">
+                <ul class="weight-list" id="weightList"></ul>
+            </div>
+
+            <!-- ✔ Panah sudah menghadap atas -->
+            <div class="arrow-indicator">
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                    <path d="M30 0L60 40H0L30 0Z" fill="#c4ff00" />
+                </svg>
+            </div>
+
+        </div>
+
+        <div class="buttons">
+            <button class="btn btn-back" onclick="window.location.href='umur.html'">Back</button>
+            <button class="btn btn-next" onclick="window.location.href='meals.html'">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const weightList = document.getElementById('weightList');
+        const weightPicker = document.querySelector('.weight-picker');
+        const defaultWeight = 32;
+
+        for (let i = 30; i <= 200; i++) {
+            const li = document.createElement('li');
+            li.className = 'weight-item';
+            li.dataset.weight = i;
+            li.textContent = i;
+
+            if (i === defaultWeight) {
+                li.classList.add('selected');
+            }
+
+            weightList.appendChild(li);
+        }
+
+        setTimeout(() => {
+            const selectedItem = document.querySelector('.weight-item.selected');
+            selectedItem.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }, 100);
+
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        weightPicker.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - weightPicker.offsetLeft;
+            scrollLeft = weightPicker.scrollLeft;
+        });
+
+        weightPicker.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+
+        weightPicker.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+
+        weightPicker.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - weightPicker.offsetLeft;
+            const walk = (x - startX) * 2;
+            weightPicker.scrollLeft = scrollLeft - walk;
+        });
+
+        let touchStartX = 0;
+        let touchScrollLeft = 0;
+
+        weightPicker.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].pageX;
+            touchScrollLeft = weightPicker.scrollLeft;
+        });
+
+        weightPicker.addEventListener('touchmove', (e) => {
+            const touchX = e.touches[0].pageX;
+            const walk = (touchStartX - touchX);
+            weightPicker.scrollLeft = touchScrollLeft + walk;
+        });
+
+        function updateCenterItem() {
+            const pickerRect = weightPicker.getBoundingClientRect();
+            const centerX = pickerRect.left + pickerRect.width / 2;
+
+            let closestItem = null;
+            let closestDistance = Infinity;
+
+            const weightItems = document.querySelectorAll('.weight-item');
+            weightItems.forEach(item => {
+                const itemRect = item.getBoundingClientRect();
+                const itemCenterX = itemRect.left + itemRect.width / 2;
+                const distance = Math.abs(centerX - itemCenterX);
+
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestItem = item;
+                }
+            });
+
+            weightItems.forEach(i => i.classList.remove('selected'));
+            if (closestItem) {
+                closestItem.classList.add('selected');
+            }
+        }
+
+        weightPicker.addEventListener('scroll', updateCenterItem);
+
+        setTimeout(updateCenterItem, 200);
+
+        const weightItems = document.querySelectorAll('.weight-item');
+        weightItems.forEach(item => {
+            item.addEventListener('click', function () {
+                this.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            });
+        });
+    </script>
+</body>
+
+</html>

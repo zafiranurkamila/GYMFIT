@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Your Mealtime</title>
+    <link rel="stylesheet" href="../Style/typeFood.css">
+</head>
+<body>
+    <div class="container">
+        <h1>CHOOSE YOUR MEALTIME</h1>
+        <p class="subtitle">You can choose more than one Don't worry,<br>you can always change it later</p>
+        
+        <div class="meal-options">
+            <button class="meal-btn" data-meal="breakfast">Breakfast</button>
+            <button class="meal-btn" data-meal="lunch">Lunch</button>
+            <button class="meal-btn" data-meal="dinner">Dinner</button>
+        </div>
+
+        <div class="buttons">
+            <button class="btn btn-back" onclick="window.location.href='height.html'">Back</button>
+            <button class="btn btn-next" onclick="window.location.href='beranda.html'">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const mealButtons = document.querySelectorAll('.meal-btn');
+        const selectedMeals = new Set();
+        
+        mealButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const meal = this.dataset.meal;
+                
+                if (selectedMeals.has(meal)) {
+                    selectedMeals.delete(meal);
+                    this.classList.remove('selected');
+                } else {
+                    selectedMeals.add(meal);
+                    this.classList.add('selected');
+                }
+                
+                console.log('Selected meals:', Array.from(selectedMeals));
+            });
+        });
+    </script>
+</body>
+</html>

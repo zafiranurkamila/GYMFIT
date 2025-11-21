@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Old Are You?</title>
+    <link rel="stylesheet" href="../Style/umur.css">
+</head>
+<body>
+    <div class="container">
+        <h1>How Old Are You?</h1>
+        <p class="subtitle">To give you a better experience and results<br>we need to know your gender</p>
+        
+        <div class="age-picker">
+            <div class="fade-overlay"></div>
+            <ul class="age-list" id="ageList"></ul>
+        </div>
+        
+        <div class="selection-box"></div>
+
+        <div class="buttons">
+            <button class="btn btn-back">Back</button>
+            <button class="btn btn-next" onclick="window.location.href='weight.html'">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const ageList = document.getElementById('ageList');
+        const agePicker = document.querySelector('.age-picker');
+        const defaultAge = 32;
+        
+        // Generate age items from 1 to 60
+        for (let i = 1; i <= 60; i++) {
+            const li = document.createElement('li');
+            li.className = 'age-item';
+            li.dataset.age = i;
+            li.textContent = i;
+            
+            if (i === defaultAge) {
+                li.classList.add('selected');
+            }
+            
+            ageList.appendChild(li);
+        }
+        
+        // Scroll to default age on load
+        setTimeout(() => {
+            const selectedItem = document.querySelector('.age-item.selected');
+            selectedItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+        
+        // Drag to scroll functionality
+        let isDown = false;
+        let startY;
+        let scrollTop;
+
+        agePicker.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startY = e.pageY - agePicker.offsetTop;
+            scrollTop = agePicker.scrollTop;
+        });
+
+        agePicker.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+
+        agePicker.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+
+        agePicker.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const y = e.pageY - agePicker.offsetTop;
+            const walk = (y - startY) * 2;
+            agePicker.scrollTop = scrollTop - walk;
+        });
+
+        // Touch support for mobile
+        let touchStartY = 0;
+        let touchScrollTop = 0;
+
+        agePicker.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].pageY;
+            touchScrollTop = agePicker.scrollTop;
+        });
+
+        agePicker.addEventListener('touchmove', (e) => {
+            const touchY = e.touches[0].pageY;
+            const walk = (touchStartY - touchY);
+            agePicker.scrollTop = touchScrollTop + walk;
+        });
+        
+        // Auto-highlight center item on scroll
+        function updateCenterItem() {
+            const pickerRect = agePicker.getBoundingClientRect();
+            const centerY = pickerRect.top + pickerRect.height / 2;
+            
+            let closestItem = null;
+            let closestDistance = Infinity;
+            
+            ageItems.forEach(item => {
+                const itemRect = item.getBoundingClientRect();
+                const itemCenterY = itemRect.top + itemRect.height / 2;
+                const distance = Math.abs(centerY - itemCenterY);
+                
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestItem = item;
+                }
+            });
+            
+            ageItems.forEach(i => i.classList.remove('selected'));
+            if (closestItem) {
+                closestItem.classList.add('selected');
+            }
+        }
+        
+        agePicker.addEventListener('scroll', updateCenterItem);
+        
+        // Initial update
+        setTimeout(updateCenterItem, 200);
+        
+        // Click handler
+        const ageItems = document.querySelectorAll('.age-item');
+        ageItems.forEach(item => {
+            item.addEventListener('click', function() {
+                this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        });
+    </script>
+</body>
+</html>

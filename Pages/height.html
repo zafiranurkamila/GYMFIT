@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is Your Height?</title>
+    <link rel="stylesheet" href="../Style/height.css">
+</head>
+<body>
+    <div class="container">
+        <h1>What is Your Height?</h1>
+        <p class="subtitle">Height in cm. Don't worry, you can always<br>change it later</p>
+        
+        <div class="height-picker">
+            <ul class="height-list" id="heightList"></ul>
+        </div>
+        
+        <div class="selection-box"></div>
+
+        <div class="buttons">
+            <button class="btn btn-back" onclick="window.location.href='meals.html'">Back</button>
+            <button class="btn btn-next" onclick="window.location.href='typeFood.html'">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const heightList = document.getElementById('heightList');
+        const heightPicker = document.querySelector('.height-picker');
+        const defaultHeight = 180;
+        
+        // Generate height items from 110 to 200
+        for (let i = 110; i <= 200; i++) {
+            const li = document.createElement('li');
+            li.className = 'height-item';
+            li.dataset.height = i;
+            li.textContent = i;
+            
+            if (i === defaultHeight) {
+                li.classList.add('selected');
+            }
+            
+            heightList.appendChild(li);
+        }
+        
+        // Scroll to default height on load
+        setTimeout(() => {
+            const selectedItem = document.querySelector('.height-item.selected');
+            selectedItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+        
+        // Drag to scroll functionality
+        let isDown = false;
+        let startY;
+        let scrollTop;
+
+        heightPicker.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startY = e.pageY - heightPicker.offsetTop;
+            scrollTop = heightPicker.scrollTop;
+        });
+
+        heightPicker.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+
+        heightPicker.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+
+        heightPicker.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const y = e.pageY - heightPicker.offsetTop;
+            const walk = (y - startY) * 2;
+            heightPicker.scrollTop = scrollTop - walk;
+        });
+
+        // Touch support for mobile
+        let touchStartY = 0;
+        let touchScrollTop = 0;
+
+        heightPicker.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].pageY;
+            touchScrollTop = heightPicker.scrollTop;
+        });
+
+        heightPicker.addEventListener('touchmove', (e) => {
+            const touchY = e.touches[0].pageY;
+            const walk = (touchStartY - touchY);
+            heightPicker.scrollTop = touchScrollTop + walk;
+        });
+        
+        // Auto-highlight center item on scroll
+        function updateCenterItem() {
+            const pickerRect = heightPicker.getBoundingClientRect();
+            const centerY = pickerRect.top + pickerRect.height / 2;
+            
+            let closestItem = null;
+            let closestDistance = Infinity;
+            
+            const heightItems = document.querySelectorAll('.height-item');
+            heightItems.forEach(item => {
+                const itemRect = item.getBoundingClientRect();
+                const itemCenterY = itemRect.top + itemRect.height / 2;
+                const distance = Math.abs(centerY - itemCenterY);
+                
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestItem = item;
+                }
+            });
+            
+            heightItems.forEach(i => i.classList.remove('selected'));
+            if (closestItem) {
+                closestItem.classList.add('selected');
+            }
+        }
+        
+        heightPicker.addEventListener('scroll', updateCenterItem);
+        
+        // Initial update
+        setTimeout(updateCenterItem, 200);
+        
+        // Click handler
+        const heightItems = document.querySelectorAll('.height-item');
+        heightItems.forEach(item => {
+            item.addEventListener('click', function() {
+                this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        });
+    </script>
+</body>
+</html>

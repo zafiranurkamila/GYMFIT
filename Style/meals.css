@@ -1,0 +1,214 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: #1a1a1a;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #c4ff00;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #ffffff;
+    margin-bottom: 4rem;
+    line-height: 1.5;
+}
+
+.time-picker-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.time-picker {
+    height: 400px;
+    width: 120px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    cursor: grab;
+}
+
+.time-picker::-webkit-scrollbar {
+    display: none;
+}
+
+.time-picker:active {
+    cursor: grabbing;
+}
+
+/* Gradient fade overlay */
+.fade-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(to bottom, #1a1a1a 0%, transparent 25%),
+        linear-gradient(to top, #1a1a1a 0%, transparent 25%);
+    pointer-events: none;
+    z-index: 5;
+}
+
+.time-list {
+    list-style: none;
+    padding: 150px 0;
+}
+
+.time-item {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #4a5a2a;
+    padding: 1rem 0;
+    margin: 0.5rem 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    line-height: 1.2;
+}
+
+.time-item:hover {
+    color: #c4ff00;
+}
+
+.time-item.selected {
+    color: #c4ff00;
+    transform: scale(1.3);
+    font-size: 4rem;
+}
+
+.time-item.selected::before,
+.time-item.selected::after {
+    content: '';
+    position: absolute;
+    left: 35%;
+    right: 35%;
+    height: 3px;
+    background-color: #ffffff;
+}
+
+.time-item.selected::before {
+    top: 5px;
+}
+
+.time-item.selected::after {
+    bottom: 5px;
+}
+
+.separator {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #c4ff00;
+    margin: 0 0.5rem;
+}
+
+/* Fixed center selection box */
+.selection-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    max-width: 90%;
+    height: 160px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.btn {
+    padding: 1rem 3rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-back {
+    background-color: #8a9b5a;
+    color: #1a1a1a;
+}
+
+.btn-back:hover {
+    background-color: #a0b070;
+    transform: translateY(-2px);
+}
+
+.btn-next {
+    background-color: #c4ff00;
+    color: #1a1a1a;
+}
+
+.btn-next:hover {
+    background-color: #d4ff20;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    .subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .time-picker {
+        height: 350px;
+        width: 100px;
+    }
+    
+    .time-item {
+        font-size: 3rem;
+    }
+    
+    .time-item.selected {
+        font-size: 3.5rem;
+    }
+    
+    .separator {
+        font-size: 3rem;
+    }
+    
+    .btn {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+    }
+}

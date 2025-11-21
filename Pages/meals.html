@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is Your Meal Times?</title>
+    <link rel="stylesheet" href="../Style/meals.css">
+</head>
+<body>
+    <div class="container">
+        <h1>What is Your Meal Times?</h1>
+        <p class="subtitle">Don't Worry you can always<br>change it later</p>
+        
+        <div class="time-picker-container">
+            <div class="time-picker">
+                <div class="fade-overlay"></div>
+                <ul class="time-list" id="hourList"></ul>
+            </div>
+            
+            <div class="separator">:</div>
+            
+            <div class="time-picker">
+                <div class="fade-overlay"></div>
+                <ul class="time-list" id="minuteList"></ul>
+            </div>
+        </div>
+        
+        <div class="selection-box"></div>
+
+        <div class="buttons">
+            <button class="btn btn-back" onclick="window.location.href='weight.html'">Back</button>
+            <button class="btn btn-next"onclick="window.location.href='height.html'">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const hourList = document.getElementById('hourList');
+        const minuteList = document.getElementById('minuteList');
+        const hourPicker = document.querySelector('.time-picker:first-child');
+        const minutePicker = document.querySelector('.time-picker:last-child');
+        const defaultHour = 7;
+        const defaultMinute = 15;
+        
+        // Generate hours from 00 to 23
+        for (let i = 0; i <= 23; i++) {
+            const li = document.createElement('li');
+            li.className = 'time-item';
+            li.dataset.value = i;
+            li.textContent = String(i).padStart(2, '0');
+            
+            if (i === defaultHour) {
+                li.classList.add('selected');
+            }
+            
+            hourList.appendChild(li);
+        }
+        
+        // Generate minutes from 00 to 59
+        for (let i = 0; i <= 59; i++) {
+            const li = document.createElement('li');
+            li.className = 'time-item';
+            li.dataset.value = i;
+            li.textContent = String(i).padStart(2, '0');
+            
+            if (i === defaultMinute) {
+                li.classList.add('selected');
+            }
+            
+            minuteList.appendChild(li);
+        }
+        
+        // Scroll to default time on load
+        setTimeout(() => {
+            const selectedHour = hourList.querySelector('.time-item.selected');
+            const selectedMinute = minuteList.querySelector('.time-item.selected');
+            selectedHour.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            selectedMinute.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+        
+        // Drag to scroll functionality for both pickers
+        function setupDragScroll(picker) {
+            let isDown = false;
+            let startY;
+            let scrollTop;
+
+            picker.addEventListener('mousedown', (e) => {
+                isDown = true;
+                startY = e.pageY - picker.offsetTop;
+                scrollTop = picker.scrollTop;
+            });
+
+            picker.addEventListener('mouseleave', () => {
+                isDown = false;
+            });
+
+            picker.addEventListener('mouseup', () => {
+                isDown = false;
+            });
+
+            picker.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const y = e.pageY - picker.offsetTop;
+                const walk = (y - startY) * 2;
+                picker.scrollTop = scrollTop - walk;
+            });
+
+            // Touch support for mobile
+            let touchStartY = 0;
+            let touchScrollTop = 0;
+
+            picker.addEventListener('touchstart', (e) => {
+                touchStartY = e.touches[0].pageY;
+                touchScrollTop = picker.scrollTop;
+            });
+
+            picker.addEventListener('touchmove', (e) => {
+                const touchY = e.touches[0].pageY;
+                const walk = (touchStartY - touchY);
+                picker.scrollTop = touchScrollTop + walk;
+            });
+        }
+        
+        setupDragScroll(hourPicker);
+        setupDragScroll(minutePicker);
+        
+        // Auto-highlight center item on scroll
+        function updateCenterItem(picker) {
+            const pickerRect = picker.getBoundingClientRect();
+            const centerY = pickerRect.top + pickerRect.height / 2;
+            
+            let closestItem = null;
+            let closestDistance = Infinity;
+            
+            const timeItems = picker.querySelectorAll('.time-item');
+            timeItems.forEach(item => {
+                const itemRect = item.getBoundingClientRect();
+                const itemCenterY = itemRect.top + itemRect.height / 2;
+                const distance = Math.abs(centerY - itemCenterY);
+                
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestItem = item;
+                }
+            });
+            
+            timeItems.forEach(i => i.classList.remove('selected'));
+            if (closestItem) {
+                closestItem.classList.add('selected');
+            }
+        }
+        
+        hourPicker.addEventListener('scroll', () => updateCenterItem(hourPicker));
+        minutePicker.addEventListener('scroll', () => updateCenterItem(minutePicker));
+        
+        // Initial update
+        setTimeout(() => {
+            updateCenterItem(hourPicker);
+            updateCenterItem(minutePicker);
+        }, 200);
+        
+        // Click handler
+        document.querySelectorAll('.time-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        });
+    </script>
+</body>
+</html>
